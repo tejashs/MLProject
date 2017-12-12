@@ -1,12 +1,13 @@
 import numpy as np
-from scipy.sparse import csr_matrix as csr
 import random
 import math
 
+LEARNING_RATES = [10, 1, 0.1, 0.01, 0.001, 0.0001]
+LOSS_PARAMS = [10, 1, 0.1, 0.01, 0.001, 0.0001]
 NUM_OF_FEATURES = 16
 RANDOM_SAMPLES = 1000
 NUM_OF_PREDICTORS = 100
-EPOCHS = 5
+EPOCHS = 10
 POS_LABEL = 1
 NEG_LABEL = -1
 arr = [1] * NUM_OF_FEATURES
@@ -19,10 +20,8 @@ TEST_F = "../data/data-splits/data.test"
 
 
 class svm:
-    def enter_svm(self, f_train, f_test):
-        train_entries = self.get_file_entries(f_train)
-        gamma_t = 0.01
-        constant = 1
+
+    def enter_svm(self, train_entries, test_entries, gamma_t, constant):
         weight_arrays = []
         bias_arrays = []
         print ("Training " + str(NUM_OF_PREDICTORS) + " SVM predictors")
@@ -31,7 +30,6 @@ class svm:
             weight_arrays.append(weights)
             bias_arrays.append(bias)
 
-        test_entries = self.get_file_entries(f_test)
         test_correct = 0
         for line in test_entries:
             prediction, true_label = self.predict_example(line, weight_arrays, bias_arrays)
@@ -40,6 +38,7 @@ class svm:
 
         test_acc = test_correct / float(len(test_entries))
         print("Test Accuracy : " + str(test_acc))
+        return test_acc
 
     def predict_example(self, example, weight_arrays, bias_arrays):
         pos_labels, neg_labels = 0, 0
@@ -75,7 +74,7 @@ class svm:
                 dotp = np.dot(weights, xarr)
                 sgd = (dotp * true_label) + bias
                 weights = weights * (1 - gamma_t)
-                bias = bias * ( 1- gamma_t)
+                bias = bias * (1 - gamma_t)
                 if sgd <= 1:
                     rhs = gamma_t * constant * true_label
                     bias = bias + rhs
@@ -142,61 +141,20 @@ class svm:
             entries.append(line)
         return entries
 
-    def init_weight_csr_vector(self):
-        arr = [RAND_FEATURE_VAL] * NUM_OF_FEATURES
-        w_arr = csr(arr, dtype=np.float64)
-        return w_arr
-
     def get_best_learning_rate(self, learning_rates, constants):
-        CROSS_VALIDATION_EPOCHS = 10
         accuracy_list = []
         for constant in constants:
             for gamma_t in learning_rates:
-                bias = 0.1
-                weights = init_weights.copy()
-                initial_learning_rate = gamma_t
-                total_accuracy = 0.0
-                print(
-                "-----------------------------------------------------------------------------------------------------------------------")
-                for i in range(5):
-                    test_file = CROSS_VALIDATION_FILES[i]
-                    train_files = [file for file in CROSS_VALIDATION_FILES if file != test_file]
-                    for file in train_files:
-                        rate = initial_learning_rate
-                        entries = self.get_file_entries(file)
-                        for epoch in range(CROSS_VALIDATION_EPOCHS):
-                            random.shuffle(entries)
-                            # CALL
-                            for line in entries:
-                                feature_indices, true_label, xarr = self.get_features_for_example(line)
-                                # dot product
-                                success, weights_for_features = self.predict(weights, feature_indices, true_label, bias)
-                                bias, weights = self.update_weights(success, gamma_t, constant, weights,
-                                                                    weights_for_features,
-                                                                    feature_indices, bias, true_label)
-                            gamma_t = initial_learning_rate / float(1 + initial_learning_rate * (epoch + 1) / constant)
-                    # Cross-validation prediction
-                    # PREDICT
-                    test_entries = self.get_file_entries(test_file)
-                    test_correct = 0
-                    for line in test_entries:
-                        feature_indices, true_label, xarr = self.get_features_for_example(line)
-                        # dot product
-                        success, _ = self.predict(weights, feature_indices, true_label, bias)
-                        if success:
-                            test_correct += 1
-                    test_acc = test_correct / float(len(test_entries))
-                    print("Running Cross Validation : Test File - " + str(test_file) + " Training Files - " + str(
-                        train_files) + "---- Accuracy : " + str(test_acc))
-                    total_accuracy += test_acc
-                average_accuracy = total_accuracy / float(5)
-                accuracy_list.append((constant, initial_learning_rate, average_accuracy))
-                print(" CONSTANT : " + str(constant) + " RATE : " + str(initial_learning_rate) + " ACCURACY : " + str(
-                    average_accuracy))
+                examples = svm.get_file_entries(TRAIN_F)
+                total = len(examples)
+                quarter = int(total/4)
+                train_exs = examples[: total-quarter-2]
+                test_exs = examples[total-quarter-1:]
+                acc = self.enter_svm(train_exs, test_exs, gamma_t, constant)
+                accuracy_list.append((constant, gamma_t, acc))
 
-        print(
-        "-----------------------------------------------------------------------------------------------------------------------")
-        return max(accuracy_list, key=lambda item: item[2])
+        print accuracy_list
+
 
     def log2(self, num):
         return math.log(num, 2)
@@ -214,6 +172,24 @@ class svm:
         return examples_to_return
 
 
-
 if __name__ == '__main__':
-    svm().enter_svm(TRAIN_F, TEST_F)
+    svm = svm()
+    # svm.get_best_learning_rate(LEARNING_RATES, LOSS_PARAMS)
+    # [(10, 10, 0.47735095690486024), (10, 1, 0.8273440726972325), (10, 0.1, 0.7965028225251274),
+    #  (10, 0.01, 0.8197714443067603), (10, 0.001, 0.8811785763458626), (10, 0.0001, 0.8694754233787692),
+    #  (1, 10, 0.47735095690486024), (1, 1, 0.8579099545642297), (1, 0.1, 0.8110973426958558),
+    #  (1, 0.01, 0.872366790582404), (1, 0.001, 0.8711276332094176), (1, 0.0001, 0.8303731240534215),
+    #  (0.1, 10, 0.47735095690486024), (0.1, 1, 0.8606636376153105), (0.1, 0.1, 0.8309238606636377),
+    #  (0.1, 0.01, 0.8672724769379044), (0.1, 0.001, 0.8654825829547019), (0.1, 0.0001, 0.855569323970811),
+    #  (0.01, 10, 0.47735095690486024), (0.01, 1, 0.8777364725320116), (0.01, 0.1, 0.8580476387167837),
+    #  (0.01, 0.01, 0.8690623709211069), (0.01, 0.001, 0.8747074211758227), (0.01, 0.0001, 0.8587360594795539),
+    #  (0.001, 10, 0.47735095690486024), (0.001, 1, 0.8466198540547983), (0.001, 0.1, 0.8440038551562715),
+    #  (0.001, 0.01, 0.8328514387993942), (0.001, 0.001, 0.8433154343935013), (0.001, 0.0001, 0.7857634586259121),
+    #  (0.0001, 10, 0.47735095690486024), (0.0001, 1, 0.8561200605810271), (0.0001, 0.1, 0.8467575382073523),
+    #  (0.0001, 0.01, 0.8535040616825004), (0.0001, 0.001, 0.8474459589701225), (0.0001, 0.0001, 0.7674514663362247)]
+
+    gamma = 0.001
+    const = 10
+    train_exs = svm.get_file_entries(TRAIN_F)
+    test_exs = svm.get_file_entries(TEST_F)
+    svm.enter_svm(train_exs, test_exs, gamma, const)
