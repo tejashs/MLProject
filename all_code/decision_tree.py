@@ -4,7 +4,7 @@ import random
 
 POS_LABEL = 1
 NEG_LABEL = 0
-DEPTH = 10
+DEPTH = 15
 SAMPLE_NUM = 100
 SP = " "
 

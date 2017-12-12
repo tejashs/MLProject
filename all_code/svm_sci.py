@@ -4,7 +4,11 @@ import random
 import math
 
 NUM_OF_FEATURES = 16
+RANDOM_SAMPLES = 1000
+NUM_OF_PREDICTORS = 100
 EPOCHS = 5
+POS_LABEL = 1
+NEG_LABEL = -1
 arr = [1] * NUM_OF_FEATURES
 x_arr = np.array(arr, dtype=np.float64)
 arr2 = [0.01] * NUM_OF_FEATURES
@@ -19,43 +23,71 @@ class svm:
         train_entries = self.get_file_entries(f_train)
         gamma_t = 0.01
         constant = 1
+        weight_arrays = []
+        bias_arrays = []
+        print ("Training " + str(NUM_OF_PREDICTORS) + " SVM predictors")
+        for i in range(NUM_OF_PREDICTORS):
+            weights, bias, train_acc = self.get_trained_svm(gamma_t, constant, train_entries)
+            weight_arrays.append(weights)
+            bias_arrays.append(bias)
+
+        test_entries = self.get_file_entries(f_test)
+        test_correct = 0
+        for line in test_entries:
+            prediction, true_label = self.predict_example(line, weight_arrays, bias_arrays)
+            if prediction == true_label:
+                test_correct += 1
+
+        test_acc = test_correct / float(len(test_entries))
+        print("Test Accuracy : " + str(test_acc))
+
+    def predict_example(self, example, weight_arrays, bias_arrays):
+        pos_labels, neg_labels = 0, 0
+        for i in range(len(weight_arrays)):
+            weights = weight_arrays[i]
+            bias = bias_arrays[i]
+            features, true_label, xarr = self.get_features_for_example(example)
+            # dot product
+            dotp = np.dot(weights, xarr)
+            sgd = dotp + bias
+            if sgd < 0:
+                neg_labels += 1
+            else:
+                pos_labels += 1
+        if pos_labels > neg_labels:
+            return POS_LABEL, true_label
+        else:
+            return NEG_LABEL, true_label
+
+    def get_trained_svm(self, rate, constant, all_examples):
         bias = 0.1
         weights = init_weights.copy()
-        train_correct = 0
         total_exs = 0
-        initial_learning_rate = gamma_t
+        train_correct = 0
+        initial_learning_rate = rate
+        gamma_t = rate
         for epoch in range(EPOCHS):
-            rand_exs = self.get_random_examples(train_entries, 100)
+            rand_exs = self.get_random_examples(all_examples, RANDOM_SAMPLES)
             for line in rand_exs:
                 total_exs += 1
                 features, true_label, xarr = self.get_features_for_example(line)
                 # dot product
                 dotp = np.dot(weights, xarr)
-                sgd = dotp * true_label
+                sgd = (dotp * true_label) + bias
                 weights = weights * (1 - gamma_t)
+                bias = bias * ( 1- gamma_t)
                 if sgd <= 1:
                     rhs = gamma_t * constant * true_label
+                    bias = bias + rhs
                     for i in range(len(xarr)):
                         weights[i] = weights[i] + (rhs * xarr[i])
                     continue
-                train_correct +=1
+                train_correct += 1
             gamma_t = initial_learning_rate / (1 + (initial_learning_rate * epoch / float(constant)))
 
         train_acc = train_correct / float(total_exs)
-        print("Train Accuracy : " + str(train_acc))
-
-        test_entries = self.get_file_entries(f_test)
-        test_correct = 0
-        for line in test_entries:
-            features, true_label, xarr = self.get_features_for_example(line)
-            # dot product
-            dotp = np.dot(weights, xarr)
-            sgd = dotp * true_label
-            if sgd > 1:
-                test_correct += 1
-
-        test_acc = test_correct / float(len(test_entries))
-        print("Test Accuracy : " + str(test_acc))
+        # print("Train Accuracy : " + str(train_acc))
+        return weights, bias, train_acc
 
     def predict(self, weights, xarr, feature_indices, true_label, bias):
         weights_for_features = weights[feature_indices]
