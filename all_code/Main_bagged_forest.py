@@ -1,0 +1,16 @@
+import bagged_forest as DT
+import datetime
+print("------------------------------------------------------")
+print("Start time")
+print("------------------------------------------------------")
+print(datetime.datetime.now())
+print("------------------------------------------------------")
+print("Running Decision Tree for Depth 3, for 1000 trees")
+print("------------------------------------------------------")
+dt = DT.Decision_Tree()
+dt.start(1000)
+print("------------------------------------------------------")
+print("End time")
+print("------------------------------------------------------")
+print(datetime.datetime.now())
+print("------------------------------------------------------")
