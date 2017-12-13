@@ -129,6 +129,8 @@ class svm:
             #         xval = -1 * xval
             # else:
             #     xval = self.log2(xval)
+            # if i == 3 or i == 4 or i == 5 or i == 5:
+            #     xval = 0
             tempX.append(xval)
         xarr = np.array(tempX, dtype=np.float64)
         return features, true_label, xarr
