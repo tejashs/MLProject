@@ -1,13 +1,11 @@
 import Perceptron as P
-import AveragedPerceptron as AP
-import MajorityBaselinePerceptron as MBP
 import sys
 sys.stdout.flush()
 
 DEFAULT_MARGIN = 0
 DUMMY_LEARNING_RATE = 1
 LEARNING_RATES = [1, 0.1, 0.01]
-MARGINS = [1, 0.1, 0.01]
+MARGINS = [1, 0.1, 0.01, 0.5]
 perceptron = P.Perceptron()
 # avg_perceptron = AP.AveragedPerceptron()
 
@@ -127,8 +125,7 @@ print("################################")
 #### Cross-Validation to determine best hyper parameters
 print "Finding Best Hyper parameters by Cross- Validation"
 print "Will calculate Aggressive Learning Rate for Weight Updates"
-# agg_marg_best_rate = perceptron.get_best_learning_rate([DUMMY_LEARNING_RATE], IS_DYNAMIC_LEARNING, MARGINS, IS_AGGRESSIVE)
-agg_marg_best_rate = [0.1, None, None]
+agg_marg_best_rate = perceptron.get_best_learning_rate([DUMMY_LEARNING_RATE], IS_DYNAMIC_LEARNING, MARGINS, IS_AGGRESSIVE)
 print("-------------------------------------------------------------------------------")
 print("########## AGGRESSIVE MARGIN PERCEPTRON")
 print "Best Hyper Parameters - MARGIN : " + str(agg_marg_best_rate[0]) + " BEST CROSS VALIDATION ACCURACY : " + str(agg_marg_best_rate[2])

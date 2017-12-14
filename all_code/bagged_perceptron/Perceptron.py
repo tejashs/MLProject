@@ -230,7 +230,7 @@ class Perceptron:
         count = len(features)
         for i in range(count):
             w = weight_vector[i]
-            x = features[i]
+            x = self.transform_log(features[i])
             weight_vector[i] = w + (learning_rate_to_use * true_label * x)
 
         bias = bias + (learning_rate_to_use * true_label)
@@ -333,12 +333,24 @@ class Perceptron:
         modified_tokens = [(token.split(":")[0], token.split(":")[1]) for token in tokens if ":" in token]
         for token in modified_tokens:
             index, value = int(token[0]), float(token[1])
-            features[index - 1] = value
+            features[index - 1] = self.transform_log(value)
 
         features = n.array(features)
         prediction = n.array(weight_vector).dot(features) + bias
         sign_calc = true_label * prediction
         return features, true_label, prediction, sign_calc
+
+    def transform_log(self, feature_val):
+        if feature_val == 0:
+            pass
+        elif feature_val < 0 :
+            val = math.fabs(feature_val)
+            val = self.log2(val)
+            feature_val = -val
+        else:
+            feature_val = self.log2(feature_val)
+        return feature_val
+
 
 
 if __name__ == '__main__':
