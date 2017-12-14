@@ -2,9 +2,9 @@ import numpy as n
 import random
 import math
 
-PREDICTION_PATH = "../data/data-splits/"
-TRAIN_F = "../data/data-splits/data.train"
-TEST_F = "../data/data-splits/data.test"
+PREDICTION_PATH = "../../data/data-splits/"
+TRAIN_F = "../../data/data-splits/data.train"
+TEST_F = "../../data/data-splits/data.test"
 POS_LABEL = 1
 NEG_LABEL = -1
 ZERO_LABEL = 0
@@ -27,11 +27,8 @@ def rand():
 class Perceptron:
     def __init__(self):
         self.bias = 0.0
-        self.f_train = "../data/data-splits/data2.train.csv"
-        self.f_test = "../data/data-splits/data2.test"
-        self.f_dev = "../data/data-splits/data2.test"
-        self.id_file = "../data/data-splits/data.eval.id"
-        self.eval_file = "../data/data-splits/data.eval.anon"
+        self.id_file = "../../data/data-splits/data.eval.id"
+        self.eval_file = "../../data/data-splits/data.eval.anon"
         f = open(self.id_file, "r")
         self.ids = [x.strip('\n') for x in f]
         self.weight_update_count = 0

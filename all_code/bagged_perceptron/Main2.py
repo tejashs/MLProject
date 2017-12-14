@@ -9,7 +9,7 @@ DUMMY_LEARNING_RATE = 1
 LEARNING_RATES = [1, 0.1, 0.01]
 MARGINS = [1, 0.1, 0.01]
 perceptron = P.Perceptron()
-avg_perceptron = AP.AveragedPerceptron()
+# avg_perceptron = AP.AveragedPerceptron()
 
 IS_AGGRESSIVE = False
 IS_DYNAMIC_LEARNING = False
@@ -127,8 +127,8 @@ print("################################")
 #### Cross-Validation to determine best hyper parameters
 print "Finding Best Hyper parameters by Cross- Validation"
 print "Will calculate Aggressive Learning Rate for Weight Updates"
-agg_marg_best_rate = perceptron.get_best_learning_rate([DUMMY_LEARNING_RATE], IS_DYNAMIC_LEARNING, MARGINS, IS_AGGRESSIVE)
-# agg_marg_best_rate = [0.1, None, None]
+# agg_marg_best_rate = perceptron.get_best_learning_rate([DUMMY_LEARNING_RATE], IS_DYNAMIC_LEARNING, MARGINS, IS_AGGRESSIVE)
+agg_marg_best_rate = [0.1, None, None]
 print("-------------------------------------------------------------------------------")
 print("########## AGGRESSIVE MARGIN PERCEPTRON")
 print "Best Hyper Parameters - MARGIN : " + str(agg_marg_best_rate[0]) + " BEST CROSS VALIDATION ACCURACY : " + str(agg_marg_best_rate[2])

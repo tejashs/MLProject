@@ -15,8 +15,8 @@ x_arr = np.array(arr, dtype=np.float64)
 arr2 = [0.01] * NUM_OF_FEATURES
 init_weights = np.array(arr2, dtype=np.float64)
 RAND_FEATURE_VAL = 0.01
-TRAIN_F = "../data/data-splits/data.train"
-TEST_F = "../data/data-splits/data.test"
+TRAIN_F = "../../data/data-splits/data.train"
+TEST_F = "../../data/data-splits/data.test"
 
 
 class svm:

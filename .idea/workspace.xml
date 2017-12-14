@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd38b91d-e47a-4114-ae5a-e14a32762e3f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/all_code/bagged_svm/svm_sci.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/all_code/Main_bagged_forest.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/all_code/Main_decision_tree.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/all_code/bagged_forest.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/all_code/decision_tree.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/all_code/svm_sci.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/all_code/feature.info" afterPath="$PROJECT_DIR$/all_code/decision_trees/feature.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/all_code/bagged_perceptron/Main2.py" afterPath="$PROJECT_DIR$/all_code/bagged_perceptron/Main2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/all_code/bagged_perceptron/Perceptron.py" afterPath="$PROJECT_DIR$/all_code/bagged_perceptron/Perceptron.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/all_code/bagged_svm/svm_sci.py" afterPath="$PROJECT_DIR$/all_code/bagged_svm/svm_sci.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/all_code/perceptron/Main2.py" afterPath="$PROJECT_DIR$/all_code/perceptron/Main2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/all_code/perceptron/Perceptron.py" afterPath="$PROJECT_DIR$/all_code/perceptron/Perceptron.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/all_code/svm/svm_sci.py" afterPath="$PROJECT_DIR$/all_code/svm/svm_sci.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,13 +19,81 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Proj2_0$decision_tree.coverage" NAME="decision_tree Coverage Results" MODIFIED="1513068537688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/all_code" />
     <SUITE FILE_PATH="coverage/Proj2_0$process__1_.coverage" NAME="process (1) Coverage Results" MODIFIED="1513056010303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/all_code" />
+    <SUITE FILE_PATH="coverage/Proj2_0$Main2.coverage" NAME="Main2 Coverage Results" MODIFIED="1513287004655" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/all_code/bagged_perceptron" />
     <SUITE FILE_PATH="coverage/Proj2_0$process.coverage" NAME="process Coverage Results" MODIFIED="1512969723466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preprocess" />
     <SUITE FILE_PATH="coverage/Proj2_0$svm_sci.coverage" NAME="svm_sci Coverage Results" MODIFIED="1513078623446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/all_code" />
     <SUITE FILE_PATH="coverage/Proj2_0$Main_decision_tree__1_.coverage" NAME="Main_decision_tree (1) Coverage Results" MODIFIED="1513286598485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/all_code/decision_trees" />
     <SUITE FILE_PATH="coverage/Proj2_0$Main_decision_tree.coverage" NAME="Main_decision_tree Coverage Results" MODIFIED="1513286582155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/all_code" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Main2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/all_code/bagged_perceptron/Main2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2571">
+              <caret line="130" column="26" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/all_code/perceptron/Main2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="598">
+              <caret line="148" column="0" lean-forward="true" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="svm_sci.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/all_code/bagged_svm/svm_sci.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3062">
+              <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="svm_sci.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/all_code/svm/svm_sci.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Perceptron.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/all_code/bagged_perceptron/Perceptron.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="188">
+              <caret line="12" column="18" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="345" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Perceptron.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/all_code/perceptron/Perceptron.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="598">
+              <caret line="345" column="0" lean-forward="true" selection-start-line="345" selection-start-column="0" selection-end-line="345" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -51,6 +117,12 @@
         <option value="$PROJECT_DIR$/all_code/Main_decision_tree.py" />
         <option value="$PROJECT_DIR$/all_code/decision_tree.py" />
         <option value="$PROJECT_DIR$/all_code/decision_trees/Main_decision_tree.py" />
+        <option value="$PROJECT_DIR$/all_code/bagged_perceptron/Main2.py" />
+        <option value="$PROJECT_DIR$/all_code/bagged_perceptron/Perceptron.py" />
+        <option value="$PROJECT_DIR$/all_code/perceptron/Perceptron.py" />
+        <option value="$PROJECT_DIR$/all_code/perceptron/Main2.py" />
+        <option value="$PROJECT_DIR$/all_code/bagged_svm/svm_sci.py" />
+        <option value="$PROJECT_DIR$/all_code/svm/svm_sci.py" />
       </list>
     </option>
   </component>
@@ -99,6 +171,30 @@
               <item name="all_code" type="462c0819:PsiDirectoryNode" />
               <item name="bagged_perceptron" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Proj2.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj2.0" type="462c0819:PsiDirectoryNode" />
+              <item name="all_code" type="462c0819:PsiDirectoryNode" />
+              <item name="bagged_svm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proj2.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj2.0" type="462c0819:PsiDirectoryNode" />
+              <item name="all_code" type="462c0819:PsiDirectoryNode" />
+              <item name="decision_trees" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proj2.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj2.0" type="462c0819:PsiDirectoryNode" />
+              <item name="all_code" type="462c0819:PsiDirectoryNode" />
+              <item name="perceptron" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proj2.0" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj2.0" type="462c0819:PsiDirectoryNode" />
+              <item name="all_code" type="462c0819:PsiDirectoryNode" />
+              <item name="svm" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -132,7 +228,25 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Main_decision_tree (1)">
+  <component name="RunManager" selected="Python.Main2">
+    <configuration name="Main2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/all_code/bagged_perceptron" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Proj2.0" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/all_code/bagged_perceptron/Main2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="Main_decision_tree (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -187,24 +301,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="process (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/all_code" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Proj2.0" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/all_code/process.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="svm_sci" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -225,18 +321,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.Main_decision_tree" />
-      <item index="1" class="java.lang.String" itemvalue="Python.process (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.svm_sci" />
-      <item index="3" class="java.lang.String" itemvalue="Python.decision_tree" />
-      <item index="4" class="java.lang.String" itemvalue="Python.Main_decision_tree (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.svm_sci" />
+      <item index="2" class="java.lang.String" itemvalue="Python.decision_tree" />
+      <item index="3" class="java.lang.String" itemvalue="Python.Main_decision_tree (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Main2" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Main_decision_tree (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Main_decision_tree" />
-        <item index="2" class="java.lang.String" itemvalue="Python.svm_sci" />
-        <item index="3" class="java.lang.String" itemvalue="Python.decision_tree" />
-        <item index="4" class="java.lang.String" itemvalue="Python.process (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Main2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Main_decision_tree (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Main_decision_tree" />
+        <item index="3" class="java.lang.String" itemvalue="Python.svm_sci" />
+        <item index="4" class="java.lang.String" itemvalue="Python.decision_tree" />
       </list>
     </recent_temporary>
   </component>
@@ -258,8 +354,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="805" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2636103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2636103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -267,7 +364,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917705" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917705" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.65918535" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -575,18 +672,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/all_code/bagged_perceptron/AveragedPerceptron.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all_code/bagged_perceptron/Perceptron.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="12" column="18" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="345" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all_code/perceptron/Perceptron.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="345" column="0" lean-forward="true" selection-start-line="345" selection-start-column="0" selection-end-line="345" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all_code/bagged_perceptron/Main2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2571">
+          <caret line="130" column="26" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all_code/perceptron/Main2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="148" column="0" lean-forward="true" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/all_code/bagged_svm/svm_sci.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        <state relative-caret-position="-3062">
+          <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/all_code/svm/svm_sci.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
