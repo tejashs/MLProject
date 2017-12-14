@@ -8,7 +8,6 @@ TEST_F = "../../data/data-splits/data.test"
 POS_LABEL = 1
 NEG_LABEL = -1
 ZERO_LABEL = 0
-NUM_PERCEPTRONS = 100
 SIZE_OF_FEATURES = 16
 NUM_OF_EPOCHS = 20
 DEFAULT_TIME_STEP = 0
@@ -35,31 +34,27 @@ class Perceptron:
 
     def start_perceptron2(self, learning_rate, is_dynamic_learning, margin, is_aggressive):
         init_array = [rand()] * SIZE_OF_FEATURES
-        epoch_weight_dict = []
         examples = self.get_file_entries(TRAIN_F)
-        print("Building " + str(NUM_PERCEPTRONS) + " Perceptrons...")
-        for i in range(NUM_PERCEPTRONS):
-            weight_vector = n.array(init_array)
-            bias = rand()
-            initial_learning_rate = learning_rate
-            time_step = DEFAULT_TIME_STEP
-            for j in range(NUM_OF_EPOCHS):
-                rand_entries = self.get_random_examples(examples, 1000)
-                learning_rate, accuracy, weight_vector, bias, ts = self.run_base_case_perceptron(rand_entries,
-                                                                                                 weight_vector, bias,
-                                                                                                 learning_rate, margin,
-                                                                                                 False,
-                                                                                                 is_dynamic_learning,
-                                                                                                 time_step,
-                                                                                                 initial_learning_rate,
-                                                                                                 is_aggressive, None)
-                if is_dynamic_learning:
-                    time_step = ts
-            epoch_weight_dict.append((weight_vector, bias))
+        weight_vector = n.array(init_array)
+        bias = rand()
+        initial_learning_rate = learning_rate
+        time_step = DEFAULT_TIME_STEP
+        for j in range(NUM_OF_EPOCHS):
+            rand_entries = self.get_random_examples(examples, 1000)
+            learning_rate, accuracy, weight_vector, bias, ts = self.run_base_case_perceptron(rand_entries,
+                                                                                             weight_vector, bias,
+                                                                                             learning_rate, margin,
+                                                                                             False,
+                                                                                             is_dynamic_learning,
+                                                                                             time_step,
+                                                                                             initial_learning_rate,
+                                                                                             is_aggressive, None)
+            if is_dynamic_learning:
+                time_step = ts
 
         print("Predicting Test Examples...")
         test_examples = self.get_file_entries(TEST_F)
-        correct, total = self.predict_set_in_file(test_examples, epoch_weight_dict, False)
+        correct, total = self.predict_set_in_file(test_examples, weight_vector, bias, False)
         log(
             "-----------------------------------------------------------------------------------------------------------------------")
         log(
@@ -69,25 +64,16 @@ class Perceptron:
             "***********************************************************************************************************************")
         print("Predicting Eval Examples... And Generating Output")
         eval_examples = self.get_file_entries(self.eval_file)
-        correct, total = self.predict_set_in_file(eval_examples, epoch_weight_dict, True)
-        return "blah", "blah", "blah"
+        correct, total = self.predict_set_in_file(eval_examples, weight_vector, bias, True)
+        return None
 
-    def predict_set_in_file(self, test_examples, weight_dict, gen_output):
+    def predict_set_in_file(self, test_examples, weight_vector, bias, gen_output):
         correct = 0
         output = []
         file_index = 0
         for ex in test_examples:
-            pos, neg = 0, 0
-            true_label = None
-            for i in range(len(weight_dict)):
-                weight_vector, bias = weight_dict[i]
-                _, true_label, prediction, _ = self.predict_example(ex, weight_vector, bias)
-                if prediction < 0:
-                    neg += 1
-                else:
-                    pos += 1
-
-            final_prediction = POS_LABEL if pos > neg else NEG_LABEL
+            _, true_label, prediction, _ = self.predict_example(ex, weight_vector, bias)
+            final_prediction = NEG_LABEL if prediction < 0 else POS_LABEL
 
             if gen_output:
                 flag = final_prediction
@@ -106,59 +92,6 @@ class Perceptron:
             for item in output:
                 file.write("%s\n" % item)
         return correct, len(test_examples)
-
-    def start_perceptron(self, learning_rate, is_dynamic_learning, margin, is_aggressive):
-        time_step = DEFAULT_TIME_STEP
-        init_array = [rand()] * SIZE_OF_FEATURES
-        weight_vector = n.array(init_array)
-        bias = rand()
-        epoch_weight_dict = []
-        initial_learning_rate = learning_rate
-        self.weight_update_count = 0
-        # Run Training
-        log("Running Training")
-        if not is_aggressive: log("Initial Learning Rate : " + str(learning_rate))
-        log(
-            "-----------------------------------------------------------------------------------------------------------------------")
-        log("Epoch Number |  Accuracy on Training Set | Accuracy on Dev Set")
-        log(
-            "-----------------------------------------------------------------------------------------------------------------------")
-        for epoch in range(NUM_OF_EPOCHS):
-            learning_rate, accuracy, weight_vector, bias, ts = self.run_base_case_perceptron(self.f_train,
-                                                                                             weight_vector, bias,
-                                                                                             learning_rate, margin,
-                                                                                             False, is_dynamic_learning,
-                                                                                             time_step,
-                                                                                             initial_learning_rate,
-                                                                                             is_aggressive, None)
-            if is_dynamic_learning:
-                time_step = ts
-            # Predict on Dev Set
-            lr, dev_accuracy, wv, b, ts = self.run_base_case_perceptron(self.f_dev, weight_vector, bias, learning_rate,
-                                                                        margin, True, is_dynamic_learning, time_step,
-                                                                        initial_learning_rate, is_aggressive, None)
-            epoch_weight_dict.append((learning_rate, dev_accuracy, weight_vector, bias, epoch))
-            log(str(epoch + 1) + "," + str(accuracy) + "," + str(dev_accuracy))
-            # log("Epoch Number : " + str(epoch))
-            # log("Accuracy on Training Set : " + str(accuracy))
-            # log("Accuracy on Dev Set : " + str(dev_accuracy))
-
-        max_val = max(epoch_weight_dict, key=lambda item: item[1])
-        best_learning_rate, max_accuracy, best_weight_vector, best_bias, best_epoch = max_val
-        log(
-            "-----------------------------------------------------------------------------------------------------------------------")
-        log(
-            "***********************************************************************************************************************")
-        log("Best Dev/Test Accuracy : " + str(max_accuracy) + " Epoch : " + str(best_epoch + 1))
-        # Predict on Test Set
-        lr, test_set_accuracy, wv, b, ts = self.run_base_case_perceptron(self.eval_file, best_weight_vector, best_bias,
-                                                                         best_learning_rate, margin, True,
-                                                                         is_dynamic_learning, time_step,
-                                                                         initial_learning_rate, is_aggressive, True)
-        log("Test Set Accuracy : " + str(test_set_accuracy))
-        log(
-            "***********************************************************************************************************************")
-        return max_accuracy, test_set_accuracy, self.weight_update_count
 
     """
     #########################################################################################################
@@ -285,7 +218,7 @@ class Perceptron:
                                 time_step = ts
 
                     # Cross-validation prediction
-                    correct, total = self.predict_set_in_file(test_entries, [(weight_vector, bias)], False)
+                    correct, total = self.predict_set_in_file(test_entries, weight_vector, bias, False)
                     accuracy = correct / float(total)
                     total_accuracy += accuracy
                 average_accuracy = total_accuracy / float(5)
@@ -354,4 +287,4 @@ class Perceptron:
 
 
 if __name__ == '__main__':
-    per = Perceptron().get_best_learning_rate([1, 2], True, [1, 2], True)
+    print("Run from Main2.py")

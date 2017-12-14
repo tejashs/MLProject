@@ -354,4 +354,5 @@ class Perceptron:
 
 
 if __name__ == '__main__':
-    per = Perceptron().get_best_learning_rate([1, 2], True, [1, 2], True)
+    # per = Perceptron().get_best_learning_rate([1, 2], True, [1, 2], True)
+    print("Run from Main2.py")

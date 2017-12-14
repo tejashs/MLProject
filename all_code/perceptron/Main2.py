@@ -133,13 +133,8 @@ print("-------------------------------------------------------------------------
 IS_AGGRESSIVE = True
 IS_DYNAMIC_LEARNING = True
 ### Running Training and Prediction using the BEST HYPER PARAMETER - Margin - 0.1
-file_name="prediction_AGGRESSIVE_margin_"+str(agg_marg_best_rate[0])+".csv"
+file_name="Perceptron_AGG_margin_"+str(agg_marg_best_rate[0])+".csv"
 perceptron.set_output_file_name(file_name)
-dev_set_acc, test_set_acc, weight_update_count = perceptron.start_perceptron2(DUMMY_LEARNING_RATE, IS_DYNAMIC_LEARNING,[agg_marg_best_rate[0]], IS_AGGRESSIVE)
+perceptron.start_perceptron2(DUMMY_LEARNING_RATE, IS_DYNAMIC_LEARNING,[agg_marg_best_rate[0]], IS_AGGRESSIVE)
 print("-------------------------------------------------------------------------------")
-print("#### FINAL RESULTS - AGGRESSIVE MARGIN PERCEPTRON")
-print "Best Hyper Parameters - " + " MARGIN : " + str(agg_marg_best_rate[0])
-print "Best Cross Validation Accuracy : " + str(agg_marg_best_rate[2])
-print "Development Set Accuracy : " + str(dev_set_acc)
-print "Test Set Accuracy : " + str(test_set_acc)
-print("-------------------------------------------------------------------------------")
+
