@@ -2,11 +2,8 @@ import numpy as np
 import random
 import math
 
-LEARNING_RATES = [10, 1, 0.1, 0.01, 0.001, 0.0001]
-LOSS_PARAMS = [10, 1, 0.1, 0.01, 0.001, 0.0001]
 NUM_OF_FEATURES = 16
 RANDOM_SAMPLES = 1000
-NUM_OF_PREDICTORS = 100
 EPOCHS = 10
 POS_LABEL = 1
 NEG_LABEL = -1
@@ -15,8 +12,6 @@ x_arr = np.array(arr, dtype=np.float64)
 arr2 = [0.01] * NUM_OF_FEATURES
 init_weights = np.array(arr2, dtype=np.float64)
 RAND_FEATURE_VAL = 0.01
-TRAIN_F = "../../data/data-splits/data.train"
-TEST_F = "../../data/data-splits/data.test"
 EVAL_ID = "../../data/data-splits/data.eval.id"
 EVAL = "../../data/data-splits/data.eval.anon"
 PREDICTION_PATH = "../../data/data-splits/"
@@ -24,19 +19,14 @@ PREDICTION_PATH = "../../data/data-splits/"
 
 class svm:
 
-    def enter_svm(self, train_entries, test_entries, gamma_t, constant, gen_output, num_predictors):
-        weight_arrays = []
-        bias_arrays = []
-        if num_predictors > 1:
-            print ("Training " + str(num_predictors) + " SVM predictors")
-        for i in range(num_predictors):
-            weights, bias, train_acc = self.get_trained_svm(gamma_t, constant, train_entries)
-            weight_arrays.append(weights)
-            bias_arrays.append(bias)
-
+    def enter_svm(self, train_entries, test_entries, gamma_t, constant, gen_output):
+        weights, bias, train_acc = self.get_trained_svm(gamma_t, constant, train_entries)
+        if gen_output:
+            print (" --------------------------------------------------")
+            print(" Training Accuracy - " + str(train_acc))
         test_correct = 0
         for line in test_entries:
-            prediction, true_label = self.predict_example(line, weight_arrays, bias_arrays)
+            prediction, true_label = self.predict_example(line, weights, bias)
             if prediction == true_label:
                 test_correct += 1
 
@@ -48,7 +38,7 @@ class svm:
             file_index = 0
             output_file = []
             for ex in examples:
-                prediction, _ = self.predict_example(ex, weight_arrays, bias_arrays)
+                prediction, _ = self.predict_example(ex, weights, bias)
                 if prediction < 0:
                     flag = 0
                 else:
@@ -60,26 +50,21 @@ class svm:
             f.write("Id,Prediction\n")
             for item in output_file:
                 f.write("%s\n" % item)
+            print (" --------------------------------------------------")
+            print("IDs Output File generated " + str(PREDICTION_PATH + self.output_file_name))
+            print (" --------------------------------------------------")
 
         return test_acc
 
-    def predict_example(self, example, weight_arrays, bias_arrays):
-        pos_labels, neg_labels = 0, 0
-        for i in range(len(weight_arrays)):
-            weights = weight_arrays[i]
-            bias = bias_arrays[i]
-            features, true_label, xarr = self.get_features_for_example(example)
-            # dot product
-            dotp = np.dot(weights, xarr)
-            sgd = dotp + bias
-            if sgd < 0:
-                neg_labels += 1
-            else:
-                pos_labels += 1
-        if pos_labels > neg_labels:
-            return POS_LABEL, true_label
-        else:
+    def predict_example(self, example, weights, bias):
+        features, true_label, xarr = self.get_features_for_example(example)
+        # dot product
+        dotp = np.dot(weights, xarr)
+        sgd = dotp + bias
+        if sgd < 0:
             return NEG_LABEL, true_label
+        else:
+            return POS_LABEL, true_label
 
     def get_trained_svm(self, rate, constant, all_examples):
         bias = 0.1
@@ -156,18 +141,18 @@ class svm:
             entries.append(line)
         return entries
 
-    def get_best_learning_rate(self, learning_rates, constants):
+    def get_best_learning_rate(self, learning_rates, constants, train_file):
         accuracy_list = []
         for constant in constants:
             for gamma_t in learning_rates:
-                examples = svm.get_file_entries(TRAIN_F)
+                examples = self.get_file_entries(train_file)
                 total = len(examples)
                 quarter = int(total/4)
                 train_exs = examples[: total-quarter-2]
                 test_exs = examples[total-quarter-1:]
-                acc = self.enter_svm(train_exs, test_exs, gamma_t, constant, False, 1)
+                acc = self.enter_svm(train_exs, test_exs, gamma_t, constant, False)
+                print(" Gamma - " + str(gamma_t) + " Constant - " + str(constant) + " Accuracy - " +str(acc))
                 accuracy_list.append((constant, gamma_t, acc))
-        print accuracy_list
         return max(accuracy_list, key=lambda item: item[2])
 
 
@@ -203,14 +188,4 @@ class svm:
 
 
 if __name__ == '__main__':
-    svm = svm()
-    best = svm.get_best_learning_rate(LEARNING_RATES, LOSS_PARAMS)
-    # gamma = 0.001
-    # const = 10
-    gamma, const = best[1], best[0]
-    print("Best gamma - " + str(gamma) + " Best Const " + str(const))
-    train_exs = svm.get_file_entries(TRAIN_F)
-    test_exs = svm.get_file_entries(TEST_F)
-    svm.set_output_file_name("svm_bagged_gamma_" + str(gamma) + "_const_" + str(const) + ".csv")
-    test_acc = svm.enter_svm(train_exs, test_exs, gamma, const, True, NUM_OF_PREDICTORS)
-    print("Test Accuracy : " + str(test_acc))
+    print("Run from Main.py")
