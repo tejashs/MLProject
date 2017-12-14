@@ -2,11 +2,8 @@ import numpy as np
 import random
 import math
 
-LEARNING_RATES = [10, 1, 0.1, 0.01, 0.001, 0.0001]
-LOSS_PARAMS = [10, 1, 0.1, 0.01, 0.001, 0.0001]
 NUM_OF_FEATURES = 16
 RANDOM_SAMPLES = 1000
-NUM_OF_PREDICTORS = 100
 EPOCHS = 10
 POS_LABEL = 1
 NEG_LABEL = -1
@@ -15,8 +12,6 @@ x_arr = np.array(arr, dtype=np.float64)
 arr2 = [0.01] * NUM_OF_FEATURES
 init_weights = np.array(arr2, dtype=np.float64)
 RAND_FEATURE_VAL = 0.01
-TRAIN_F = "../../data/data-splits/data.train"
-TEST_F = "../../data/data-splits/data.test"
 EVAL_ID = "../../data/data-splits/data.eval.id"
 EVAL = "../../data/data-splits/data.eval.anon"
 PREDICTION_PATH = "../../data/data-splits/"
@@ -60,6 +55,9 @@ class svm:
             f.write("Id,Prediction\n")
             for item in output_file:
                 f.write("%s\n" % item)
+            print (" --------------------------------------------------")
+            print("IDs Output File generated " + str(PREDICTION_PATH + self.output_file_name))
+            print (" --------------------------------------------------")
 
         return test_acc
 
@@ -156,11 +154,11 @@ class svm:
             entries.append(line)
         return entries
 
-    def get_best_learning_rate(self, learning_rates, constants):
+    def get_best_learning_rate(self, learning_rates, constants, train_file):
         accuracy_list = []
         for constant in constants:
             for gamma_t in learning_rates:
-                examples = svm.get_file_entries(TRAIN_F)
+                examples = self.get_file_entries(train_file)
                 total = len(examples)
                 quarter = int(total/4)
                 train_exs = examples[: total-quarter-2]
@@ -203,14 +201,4 @@ class svm:
 
 
 if __name__ == '__main__':
-    svm = svm()
-    best = svm.get_best_learning_rate(LEARNING_RATES, LOSS_PARAMS)
-    # gamma = 0.001
-    # const = 10
-    gamma, const = best[1], best[0]
-    print("Best gamma - " + str(gamma) + " Best Const " + str(const))
-    train_exs = svm.get_file_entries(TRAIN_F)
-    test_exs = svm.get_file_entries(TEST_F)
-    svm.set_output_file_name("svm_bagged_gamma_" + str(gamma) + "_const_" + str(const) + ".csv")
-    test_acc = svm.enter_svm(train_exs, test_exs, gamma, const, True, NUM_OF_PREDICTORS)
-    print("Test Accuracy : " + str(test_acc))
+    print("Run from Main.py")

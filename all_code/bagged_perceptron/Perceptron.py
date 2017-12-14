@@ -105,6 +105,9 @@ class Perceptron:
             file.write("Id,Prediction\n")
             for item in output:
                 file.write("%s\n" % item)
+            print (" --------------------------------------------------")
+            print("IDs Output File generated " + str(PREDICTION_PATH + self.output_file_name))
+            print (" --------------------------------------------------")
         return correct, len(test_examples)
 
     def start_perceptron(self, learning_rate, is_dynamic_learning, margin, is_aggressive):
