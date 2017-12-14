@@ -6,18 +6,11 @@ POS_LABEL = 1
 NEG_LABEL = 0
 DEPTH = 15
 SAMPLE_NUM = 100
-SP = " "
-
-CROSS_VALIDATION_FILES = ["data/training00.data", "data/training01.data", "data/training02.data",
-                          "data/training03.data", "data/training04.data"]
-F_TRAIN = "data/speeches.train.liblinear"
-F_TEST = "data/speeches.test.liblinear"
 
 random.seed(5)
 
 
 class Decision_Tree:
-
     def get_label_counts_and_features(self, file_entries, feature_nodes):
         y = dict()
         y[POS_LABEL] = []
@@ -71,6 +64,9 @@ class Decision_Tree:
         return y, features_dict
 
     def start(self, num_of_trees, train_file, test_file):
+        print("------------------------------------------------------")
+        print("Building " + str(num_of_trees) + " Decision Tree for Depth " + str(DEPTH))
+        print("------------------------------------------------------")
         with open("feature.info") as f:
             feature_info = f.readlines()
 
@@ -88,13 +84,13 @@ class Decision_Tree:
         root = self.id3(file_entries, feature_nodes, None, None, depth=0)
         correct, wrong = 0, 0
         for example in file_entries:
-            prediction, true_label = self.predict(root,example, None, None)
+            prediction, true_label = self.predict(root, example, None, None)
             if int(prediction) == int(true_label):
-                correct +=1
+                correct += 1
             else:
-                wrong +=1
+                wrong += 1
 
-        print("Train Accuracy" + str(correct/float(correct+wrong)))
+        print("Train Accuracy" + str(correct / float(correct + wrong)))
 
         test_entries = self.get_file_entries(test_file)
         correct, wrong = 0, 0
@@ -106,7 +102,6 @@ class Decision_Tree:
                 wrong += 1
 
         print("Test Accuracy" + str(correct / float(correct + wrong)))
-
 
     def predict(self, root, example, true_label, features_dict):
         if not true_label and not features_dict:
@@ -132,14 +127,14 @@ class Decision_Tree:
             features_dict[subtokens[0]] = subtokens[1]
         return true_label, features_dict
 
-
     def calculate_expected_entropy(self, y, feature_node, feature):
         entropy_val_dict = dict()
         full_total_examples = 0
         for val in feature_node.get_possible_vals():
             if val in feature:
                 subset_exs_dict = feature[val]
-            else: continue
+            else:
+                continue
             pos_exs = subset_exs_dict[POS_LABEL]
             neg_exs = subset_exs_dict[NEG_LABEL]
             total = float(len(pos_exs) + len(neg_exs))
@@ -156,7 +151,8 @@ class Decision_Tree:
         for val in feature_node.get_possible_vals():
             if val in entropy_val_dict:
                 entropy_val = entropy_val_dict[val]
-            else: continue
+            else:
+                continue
             expected_entropy += (entropy_val[0] * (entropy_val[1] / float(full_total_examples)))
 
         return expected_entropy
@@ -175,7 +171,6 @@ class Decision_Tree:
             print("WTF")
         best_feature = k[v.index(min(v))]
         return best_feature
-
 
     def id3(self, examples, feature_nodes, features_dict, y, depth):
         if not features_dict:
@@ -203,7 +198,7 @@ class Decision_Tree:
         if not multiple_vals:
             subset_exs = feature[unique_val]
             node.set_leaf(True)
-            prediction = POS_LABEL if len(subset_exs[POS_LABEL]) > len (subset_exs[NEG_LABEL]) else NEG_LABEL
+            prediction = POS_LABEL if len(subset_exs[POS_LABEL]) > len(subset_exs[NEG_LABEL]) else NEG_LABEL
             node.set_prediction_label(prediction)
             return node
 
@@ -211,23 +206,22 @@ class Decision_Tree:
             pos_exs = feature[val][POS_LABEL]
             neg_exs = feature[val][NEG_LABEL]
             if len(pos_exs) == 0:
-                child = Node(None, depth+1)
+                child = Node(None, depth + 1)
                 child.set_leaf(True)
                 child.set_prediction_label(NEG_LABEL)
             elif len(neg_exs) == 0:
-                child = Node(None, depth+1)
+                child = Node(None, depth + 1)
                 child.set_leaf(True)
                 child.set_prediction_label(POS_LABEL)
             else:
                 subset_exs = []
                 subset_exs.extend(pos_exs)
                 subset_exs.extend(neg_exs)
-                child = self.id3(subset_exs, feature_nodes_copy, features_dict_copy, y, depth+1)
+                child = self.id3(subset_exs, feature_nodes_copy, features_dict_copy, y, depth + 1)
 
             node.add_branch(val, child)
 
         return node
-
 
     def check_feature_multiple_values(self, feature):
         non_zero_vals = 0
@@ -264,7 +258,6 @@ class Decision_Tree:
         return num
 
 
-
 class Node:
     def __init__(self, feature, depth):
         self.feature = feature
@@ -299,6 +292,7 @@ class Node:
 
     def get_num_branches(self):
         return len(self.branches)
+
 
 class FeatureNode:
     def __init__(self, feature, vals=[]):
