@@ -7,8 +7,12 @@ import math
 import numpy as np
 import featurization
 
-f_train = "../../data/data-splits/data.train1.transformed2"
-f_test = "../../data/data-splits/data.test1.transformed2"
+PREDICTION_PATH = "../../data/data-splits/"
+OUTPUT_FILE_NAME = "DecisionTree.csv"
+f_train = "../../data/data-splits/data.train1.transformed"
+f_test = "../../data/data-splits/data.test1.transformed"
+f_eval = "../../data/data-splits/data.eval.anon1.transformed"
+f_eval_id = "../../data/data-splits/data.eval.id"
 
 depths = {1, 2, 3, 4, 5, 10, 15, 20}
 
@@ -22,8 +26,9 @@ def main():
     features = feature_info(data_info)
 
     # Cross Validation
-    for depth in depths:
-        cross_validation(depth, features)
+    # print("Running Cross Validation For depths...")
+    # for depth in depths:
+    #     cross_validation(depth, features)
 
     # Transform the data
     with open(f_train) as f:
@@ -34,8 +39,14 @@ def main():
         tdata = [line.rstrip() for line in f]
     data_test = featurization.featurize(tdata)
 
-    print("Accuracy on Train ", test(data_train, data_train, features, -1))
-    print("Accuracy on Test ", test(data_train, data_test, features, -1))
+    tree = build_tree(data_train, features, -1)
+    print("Accuracy on Train ", test(tree, data_train, False))
+    print("Accuracy on Test ", test(tree, data_test, False))
+
+    with open(f_eval) as f:
+        tdata = [line.rstrip() for line in f]
+    eval_data = featurization.featurize(tdata)
+    test(tree, eval_data, True)
 
 
 def cross_validation(depth, features):
@@ -60,16 +71,44 @@ def cross_validation(depth, features):
 
     train_data = featurization.featurize(train_examples)
     test_data = featurization.featurize(test_examples)
-    accs = [test(train_data, test_data, features, depth)]
+    tree = build_tree(train_data, features, depth)
+    accs = [test(tree, test_data, False)]
     print("Depth ", depth, "Avg. Accuracy ", np.mean(accs))
 
 
-def test(data_train, data_test, features, depth):
-    r = ID3(data_train, features, 0, depth)
+def test(root_node, data_test, gen_output):
+    ids = None
+    output_file = []
+    if gen_output:
+        with open(f_eval_id) as f:
+            ids = f.readlines()
     tot = 0.0
+    file_index = 0
     for d in data_test:
-        tot += walk_down(r, d[0], d[1])
+        prediction = walk_down(root_node, d[0], d[1])
+        tot += prediction
+        if gen_output:
+            output_file.append(str(ids[file_index].rstrip("\n")) + "," + str(prediction))
+        file_index += 1
+
+    if gen_output:
+        write_output(output_file)
     return tot / len(data_test)
+
+
+def write_output(output_file):
+    f = open(PREDICTION_PATH + OUTPUT_FILE_NAME, "w")
+    f.write("Id,Prediction\n")
+    for item in output_file:
+        f.write("%s\n" % item)
+    print (" --------------------------------------------------")
+    print("IDs Output File generated " + str(PREDICTION_PATH + OUTPUT_FILE_NAME))
+    print (" --------------------------------------------------")
+
+
+def build_tree(data_train, features, depth):
+    root = ID3(data_train, features, 0, depth)
+    return root
 
 
 def walk_down(node, point, label):
@@ -224,4 +263,4 @@ class Branch:
 
 
 if __name__ == '__main__':
-    main()
+    print("Run From Main.py")
