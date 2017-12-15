@@ -9,13 +9,15 @@ import numpy as np
 import featurization
 
 PREDICTION_PATH = "../../data/data-splits/"
-OUTPUT_FILE_NAME = "DecisionTree.csv"
+OUTPUT_FILE_NAME = "RandomForest.csv"
 f_train = "../../data/data-splits/data.train1.transformed"
 f_test = "../../data/data-splits/data.test1.transformed"
 f_eval = "../../data/data-splits/data.eval.anon1.transformed"
 f_eval_id = "../../data/data-splits/data.eval.id"
 NUM_OF_TREES = 1000
 NUM_OF_EXAMPLES = 1000
+POS_LABEL = 1
+NEG_LABEL = 0
 
 depths = {1, 2, 3, 4, 5, 10, 15, 20}
 
@@ -29,9 +31,9 @@ def main():
     features = feature_info(data_info)
 
     # Cross Validation
-    print("Running Cross Validation For depths...")
-    for depth in depths:
-        cross_validation(depth, features)
+    # print("Running Cross Validation For depths...")
+    # for depth in depths:
+    #     cross_validation(depth, features)
 
     # Transform the data
     with open(f_train) as f:
@@ -42,14 +44,19 @@ def main():
         tdata = [line.rstrip() for line in f]
     data_test = featurization.featurize(tdata)
 
-    tree = build_tree(data_train, features, -1)
-    print("Accuracy on Train ", test(tree, data_train, False))
-    print("Accuracy on Test ", test(tree, data_test, False))
+    forest = []
+    print("Building " + str(NUM_OF_TREES) + " Decision Trees as part of Random Forest")
+    for i in range(NUM_OF_TREES):
+        random_subset = get_random_examples(data_train, NUM_OF_EXAMPLES)
+        tree = build_tree(random_subset, features, -1)
+        forest.append(tree)
+
+    print("Accuracy on Test ", test(forest, data_test, False))
 
     with open(f_eval) as f:
         tdata = [line.rstrip() for line in f]
     eval_data = featurization.featurize(tdata)
-    test(tree, eval_data, True)
+    test(forest, eval_data, True)
 
 
 def cross_validation(depth, features):
@@ -79,7 +86,7 @@ def cross_validation(depth, features):
     print("Depth ", depth, "Avg. Accuracy ", np.mean(accs))
 
 
-def test(root_node, data_test, gen_output):
+def test(forest, data_test, gen_output):
     ids = None
     output_file = []
     if gen_output:
@@ -88,7 +95,7 @@ def test(root_node, data_test, gen_output):
     tot = 0.0
     file_index = 0
     for d in data_test:
-        prediction = walk_down(root_node, d[0], d[1])
+        prediction = forest_predict(forest, d, True)
         tot += prediction
         if gen_output:
             output_file.append(str(ids[file_index].rstrip("\n")) + "," + str(prediction))
@@ -98,6 +105,25 @@ def test(root_node, data_test, gen_output):
         write_output(output_file)
     return tot / len(data_test)
 
+def forest_predict(forest, example, cumulative):
+    pos = 0
+    total = len(forest)
+    prediction_arr = []
+    for i in range(total):
+        tree = forest[i]
+        prediction = walk_down(tree, example[0], example[1])
+        if cumulative:
+            pos += prediction
+        else:
+            prediction_arr.append(prediction)
+
+    if cumulative:
+        if pos > total-pos:
+            return POS_LABEL
+        else:
+            return NEG_LABEL
+    else:
+        return prediction_arr
 
 def write_output(output_file):
     f = open(PREDICTION_PATH + OUTPUT_FILE_NAME, "w")
@@ -280,4 +306,4 @@ class Branch:
 
 
 if __name__ == '__main__':
-    print("Run From Main.py")
+    print("Run From Main_forest.py")

@@ -201,4 +201,4 @@ class svm:
 
 
 if __name__ == '__main__':
-    print("Run from Main.py")
+    print("Run from Main_forest.py")
