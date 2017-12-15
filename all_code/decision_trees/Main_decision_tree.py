@@ -8,7 +8,7 @@ print("------------------------------------------------------")
 print(datetime.datetime.now())
 dt = DT.Decision_Tree()
 # dt.start(10, new_train, new_test)
-dt.start(1, "../../data/data-splits/data.train1.transformed2", "../../data/data-splits/data.test1.transformed2")
+dt.start(1, "../../data/data-splits/data.train1.transformed2", "../../data/data-splits/data.train1.transformed2")
 print("------------------------------------------------------")
 
 print("End time")
