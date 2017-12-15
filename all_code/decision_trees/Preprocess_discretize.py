@@ -1,8 +1,15 @@
+"""
+Use this file to preprocess data and convert features to binary features.
+Run this file by copying this file to the data/data-splits folder.
+"""
+
 import pandas as pd
-import math as M
 
 POS_LABEL = 1
 NEG_LABEL = 0
+train = "data.train"
+test = "data.test"
+eval = "data.eval.anon"
 
 
 class Pre_Process:
@@ -89,7 +96,4 @@ class Pre_Process:
 
 
 if __name__ == '__main__':
-    train = "data.train"
-    test = "data.test"
-    eval = "data.eval.anon"
     Pre_Process().process_file(train, eval, test)

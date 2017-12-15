@@ -26,9 +26,9 @@ def main():
     features = feature_info(data_info)
 
     # Cross Validation
-    # print("Running Cross Validation For depths...")
-    # for depth in depths:
-    #     cross_validation(depth, features)
+    print("Running Cross Validation For depths...")
+    for depth in depths:
+        cross_validation(depth, features)
 
     # Transform the data
     with open(f_train) as f:
