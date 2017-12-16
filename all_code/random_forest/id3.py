@@ -9,7 +9,7 @@ import numpy as np
 import featurization
 
 PREDICTION_PATH = "../../data/data-splits/"
-OUTPUT_FILE_NAME = "RandomForest.csv"
+OUTPUT_FILE_NAME = "RandomForest_depth_5.csv"
 f_train = "../../data/data-splits/data.train1.transformed"
 f_test = "../../data/data-splits/data.test1.transformed"
 f_eval = "../../data/data-splits/data.eval.anon1.transformed"
@@ -46,9 +46,10 @@ def main():
 
     forest = []
     print("Building " + str(NUM_OF_TREES) + " Decision Trees as part of Random Forest")
+    print("Limiting Depth 5 as per Cross-Validation")
     for i in range(NUM_OF_TREES):
         random_subset = get_random_examples(data_train, NUM_OF_EXAMPLES)
-        tree = build_tree(random_subset, features, -1)
+        tree = build_tree(random_subset, features, 5)
         forest.append(tree)
 
     print("Accuracy on Test ", test(forest, data_test, False))

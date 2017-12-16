@@ -1,0 +1,53 @@
+/Users/tejashs/anaconda2/bin/python /Users/tejashs/Downloads/ML_Project_Final/Proj2.0/all_code/svm/Main.py
+################################
+##### SVM
+################################
+Finding Best Hyper parameters by Cross- Validation
+-------------------------------------------------------------------------------
+ Gamma - 10 Constant - 10 Accuracy - 0.459176648768
+ Gamma - 1 Constant - 10 Accuracy - 0.477350956905
+ Gamma - 0.1 Constant - 10 Accuracy - 0.524025884621
+ Gamma - 0.01 Constant - 10 Accuracy - 0.798705768966
+ Gamma - 0.001 Constant - 10 Accuracy - 0.89054109872
+ Gamma - 0.0001 Constant - 10 Accuracy - 0.838909541512
+ Gamma - 10 Constant - 1 Accuracy - 0.477350956905
+ Gamma - 1 Constant - 1 Accuracy - 0.477350956905
+ Gamma - 0.1 Constant - 1 Accuracy - 0.80269860939
+ Gamma - 0.01 Constant - 1 Accuracy - 0.698747074212
+ Gamma - 0.001 Constant - 1 Accuracy - 0.896048464822
+ Gamma - 0.0001 Constant - 1 Accuracy - 0.89274404516
+ Gamma - 10 Constant - 0.1 Accuracy - 0.412639405204
+ Gamma - 1 Constant - 0.1 Accuracy - 0.865069530497
+ Gamma - 0.1 Constant - 0.1 Accuracy - 0.778053146083
+ Gamma - 0.01 Constant - 0.1 Accuracy - 0.880903208041
+ Gamma - 0.001 Constant - 0.1 Accuracy - 0.818807655239
+ Gamma - 0.0001 Constant - 0.1 Accuracy - 0.870989949057
+ Gamma - 10 Constant - 0.01 Accuracy - 0.477350956905
+ Gamma - 1 Constant - 0.01 Accuracy - 0.564229657166
+ Gamma - 0.1 Constant - 0.01 Accuracy - 0.525402726146
+ Gamma - 0.01 Constant - 0.01 Accuracy - 0.539446509707
+ Gamma - 0.001 Constant - 0.01 Accuracy - 0.531598513011
+ Gamma - 0.0001 Constant - 0.01 Accuracy - 0.584469227592
+ Gamma - 10 Constant - 0.001 Accuracy - 0.477350956905
+ Gamma - 1 Constant - 0.001 Accuracy - 0.834365964477
+ Gamma - 0.1 Constant - 0.001 Accuracy - 0.608013217679
+ Gamma - 0.01 Constant - 0.001 Accuracy - 0.554591766488
+ Gamma - 0.001 Constant - 0.001 Accuracy - 0.609940795814
+ Gamma - 0.0001 Constant - 0.001 Accuracy - 0.477350956905
+ Gamma - 10 Constant - 0.0001 Accuracy - 0.477350956905
+ Gamma - 1 Constant - 0.0001 Accuracy - 0.522649043095
+ Gamma - 0.1 Constant - 0.0001 Accuracy - 0.522649043095
+ Gamma - 0.01 Constant - 0.0001 Accuracy - 0.522649043095
+ Gamma - 0.001 Constant - 0.0001 Accuracy - 0.477350956905
+ Gamma - 0.0001 Constant - 0.0001 Accuracy - 0.477350956905
+
+Best Hyper Parameters - GAMMA : 0.001 BEST CONSTANT : 1
+ --------------------------------------------------
+ Best Cross-validation Accuracy - 0.896048464822
+ --------------------------------------------------
+IDs Output File generated ../../data/data-splits/svm_gamma_0.001_const_1.csv
+ --------------------------------------------------
+Test Accuracy : 0.836439588689
+-------------------------------------------------------------------------------
+
+Process finished with exit code 0

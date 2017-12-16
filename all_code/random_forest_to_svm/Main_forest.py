@@ -1,13 +1,18 @@
 import id3 as DT
-import Main as MainSVM
+import start_svm as MainSVM
 import datetime
 
 print("------------------------------------------------------")
-print("Random Forest - Decision Trees With Bagging")
+print("RANDOM FOREST INTO SVM")
+print("------------------------------------------------------")
+print("Part 1 : Random Forest - Decision Trees With Bagging")
 print("------------------------------------------------------")
 print("Start time - " + str(datetime.datetime.now()))
 print("------------------------------------------------------")
-# dt = DT.main()
+dt = DT.main()
+print("------------------------------------------------------")
+print("Part 2 : SVM")
+print("------------------------------------------------------")
 MainSVM.run_this()
 print("------------------------------------------------------")
 print("End time - " + str(datetime.datetime.now()))

@@ -1,0 +1,34 @@
+/Users/tejashs/anaconda2/bin/python /Users/tejashs/Downloads/ML_Project_Final/Proj2.0/all_code/random_forest_to_svm/Main_forest.py
+------------------------------------------------------
+RANDOM FOREST INTO SVM
+------------------------------------------------------
+Part 1 : Random Forest - Decision Trees With Bagging
+------------------------------------------------------
+Start time - 2017-12-15 19:34:41.711450
+------------------------------------------------------
+Building 1000 Decision Trees as part of Random Forest
+ --------------------------------------------------
+IDs Output File generated ../../data/data-splits/RandomForest_Transformed.data
+ --------------------------------------------------
+ --------------------------------------------------
+IDs Output File generated ../../data/data-splits/RandomForest_Transformed.data
+ --------------------------------------------------
+Random Forest Feature Transformation Done.
+------------------------------------------------------
+Part 2 : SVM
+------------------------------------------------------
+################################
+##### SVM
+################################
+-------------------------------------------------------------------------------
+GAMMA : 0.001 BEST CONSTANT : 10
+Random Forest into Bagged SVM - Train Accuracy : 0.533340218252
+ --------------------------------------------------
+IDs Output File generated ../../data/data-splits/random_forest_svm_bagged_gamma_0.001_const_10.csv
+ --------------------------------------------------
+-------------------------------------------------------------------------------
+------------------------------------------------------
+End time - 2017-12-15 19:47:27.435138
+------------------------------------------------------
+
+Process finished with exit code 0

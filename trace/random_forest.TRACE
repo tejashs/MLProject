@@ -1,0 +1,17 @@
+/Users/tejashs/anaconda2/bin/python /Users/tejashs/Downloads/ML_Project_Final/Proj2.0/all_code/random_forest/Main.py
+------------------------------------------------------
+Random Forest - Decision Trees With Bagging
+------------------------------------------------------
+Start time - 2017-12-15 18:17:06.263977
+------------------------------------------------------
+Building 1000 Decision Trees as part of Random Forest
+Limiting Depth 5 as per Cross-Validation
+('Accuracy on Test ', 0.8952442159383034)
+ --------------------------------------------------
+IDs Output File generated ../../data/data-splits/RandomForest.csv
+ --------------------------------------------------
+------------------------------------------------------
+End time - 2017-12-15 18:19:46.903155
+------------------------------------------------------
+
+Process finished with exit code 0

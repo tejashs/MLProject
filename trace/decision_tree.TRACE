@@ -1,0 +1,25 @@
+/Users/tejashs/anaconda2/bin/python /Users/tejashs/Downloads/ML_Project_Final/Proj2.0/all_code/decision_trees/Main.py
+------------------------------------------------------
+Decision Trees
+------------------------------------------------------
+Start time - 2017-12-15 18:12:13.082122
+------------------------------------------------------
+Running Cross Validation For depths...
+('Depth ', 1, 'Avg. Accuracy ', 0.80612420436951659)
+('Depth ', 2, 'Avg. Accuracy ', 0.80612420436951659)
+('Depth ', 3, 'Avg. Accuracy ', 0.87648374333390677)
+('Depth ', 4, 'Avg. Accuracy ', 0.88749354894202648)
+('Depth ', 5, 'Avg. Accuracy ', 0.89678307242387756)
+('Depth ', 10, 'Avg. Accuracy ', 0.89592293136074319)
+('Depth ', 15, 'Avg. Accuracy ', 0.86857044555307072)
+('Depth ', 20, 'Avg. Accuracy ', 0.86599002236366762)
+('Accuracy on Train ', 0.9292918861234466)
+('Accuracy on Test ', 0.868573264781491)
+ --------------------------------------------------
+IDs Output File generated ../../data/data-splits/DecisionTree.csv
+ --------------------------------------------------
+------------------------------------------------------
+End time - 2017-12-15 18:12:38.903732
+------------------------------------------------------
+
+Process finished with exit code 0

@@ -8,7 +8,7 @@ import numpy as np
 import featurization
 
 PREDICTION_PATH = "../../data/data-splits/"
-OUTPUT_FILE_NAME = "DecisionTree.csv"
+OUTPUT_FILE_NAME = "DecisionTree_depth_5.csv"
 f_train = "../../data/data-splits/data.train1.transformed"
 f_test = "../../data/data-splits/data.test1.transformed"
 f_eval = "../../data/data-splits/data.eval.anon1.transformed"

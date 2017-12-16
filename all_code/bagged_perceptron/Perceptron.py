@@ -249,7 +249,7 @@ class Perceptron:
 
     # Method to run Cross-validation and determine best learning rate
     def get_best_learning_rate(self, learning_rates, is_dynamic_learning_rate, margins, is_aggressive):
-        CROSS_VALIDATION_EPOCHS = 10
+        CROSS_VALIDATION_EPOCHS = 5
         time_step = DEFAULT_TIME_STEP
         accuracy_list = []
         for margin in margins:
@@ -268,7 +268,7 @@ class Perceptron:
                 for i in range(5):
                     test_entries = cross_exs[i]
                     train_entries = [exs for exs in cross_exs if exs != test_entries]
-                    init_array = [rand() for i in range(SIZE_OF_FEATURES)]
+                    init_array = [rand()]*SIZE_OF_FEATURES
                     weight_vector = n.array(init_array)
                     bias = rand()
                     for j in range(CROSS_VALIDATION_EPOCHS):
